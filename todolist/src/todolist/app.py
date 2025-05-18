@@ -34,17 +34,27 @@ class ToDoListApp(toga.App):
     def add_task(self, widget):
         task = self.todo_input.value.strip()
         if task:
-            self.todo_list.data.append(task)
+            # Create a proper dictionary for DetailedList
+            task_item = {
+                'title': task,
+                'subtitle': '',  # Optional: Add a description or leave empty
+                'icon': None     # Optional: You can provide an icon or leave as None
+            }
+            self.todo_list.data.append(task_item)
             self.todo_input.value = ""
 
     def delete_task(self, widget):
-        selected = self.todo_list.value
+        selected = self.todo_list.selection
         if selected:
             self.todo_list.data.remove(selected)
 
-    def on_select_item(self, widget, row):
-        # Handle selection if needed
-        pass
+    def on_select_item(self, widget, *args, **kwargs):
+        # Will accept any additional parameters
+        print(f"Selection event with args: {args} and kwargs: {kwargs}")
+        # You can still access the row if it's passed
+        if args and len(args) > 0:
+            row = args[0]
+            print(f"Selected row: {row}")
 
 def main():
     return ToDoListApp()
