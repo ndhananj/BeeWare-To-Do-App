@@ -20,6 +20,8 @@ test_sources = [
     "tests",
 ]
 
+icon = "src/todolist/resources/icons/todolist.png"
+
 requires = [
 ]
 test_requires = [
